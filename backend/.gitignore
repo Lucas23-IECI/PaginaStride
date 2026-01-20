@@ -1,20 +1,30 @@
 # Dependencies
 node_modules/
-.pnpm-store/
 
-# Environment files
+# Environment variables
 .env
 .env.local
 .env.*.local
-*.env
 
 # Credentials and secrets
 firebase-service-account.json
 *-service-account.json
 *.pem
 *.key
+serviceAccountKey.json
 
-# IDE and Editor files
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+
+# IDE and editor
 .vscode/
 .idea/
 *.swp
@@ -23,24 +33,8 @@ firebase-service-account.json
 
 # OS files
 .DS_Store
-.DS_Store?
-._*
 Thumbs.db
-ehthumbs.db
 Desktop.ini
-
-# Build outputs
-dist/
-build/
-.next/
-out/
-
-# Logs
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Test coverage
 coverage/
@@ -50,13 +44,14 @@ coverage/
 tmp/
 temp/
 *.tmp
-*.temp
+
+# Cache
+.cache/
+.eslintcache
+
+# Uploads folder (if storing locally)
+uploads/
 
 # Windows reserved names
 nul
 NUL
-
-# Cache
-.cache/
-.parcel-cache/
-.eslintcache
