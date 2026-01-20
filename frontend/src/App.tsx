@@ -7,6 +7,8 @@ import { Catalog, ProductDetail, Checkout, Confirmation } from '@/features/store
 import { Dashboard, Users, EventList, CreateEvent } from '@/features/admin';
 import { ProfileDashboard, MyEvents } from '@/features/profile';
 import { MonitorDashboard } from '@/features/monitor';
+import { ExperienceHub, ExperienceDetail } from '@/features/experiences';
+import { LevelSelection, RegistrationForm, InscriptionSuccess } from '@/features/events/inscription';
 import DashboardLayout from '@/layouts/DashboardLayout';
 
 // ============================================
@@ -38,13 +40,41 @@ const StoreLayout = () => {
   );
 };
 
-// Layout minimal para checkout/confirmation (sin distracciones)
+// Layout minimal para checkout/confirmation/inscripción (sin distracciones)
+const MinimalLayout = () => {
+  const location = useLocation();
+  const isSuccess = location.pathname.includes('success') || location.pathname.includes('confirmation');
+
+  return (
+    <div className="min-h-screen flex flex-col bg-background-dark">
+      {/* Navbar Minimal */}
+      <header className="fixed top-0 left-0 right-0 z-40 bg-background-dark/90 backdrop-blur-xl border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <Link to="/experiences" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+            <span className="material-symbols-outlined">arrow_back</span>
+            <span className="text-sm font-medium hidden sm:inline">Volver</span>
+          </Link>
+          <Link to="/" className="font-script text-3xl text-white">stride</Link>
+          <div className="flex items-center gap-2 text-gray-400 text-sm">
+            <span className="material-symbols-outlined text-secondary">lock</span>
+            <span className="hidden sm:inline">Inscripción Segura</span>
+          </div>
+        </div>
+      </header>
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      {isSuccess && <Footer />}
+    </div>
+  );
+};
+
+// Layout minimal para checkout de tienda
 const CheckoutLayout = () => {
   const location = useLocation();
 
   return (
     <div className="min-h-screen flex flex-col bg-background-dark">
-      {/* Navbar Minimal */}
       <header className="fixed top-0 left-0 right-0 z-40 bg-background-dark/90 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link to="/store" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
@@ -79,7 +109,6 @@ const Placeholder = ({ title }: { title: string }) => (
   </div>
 );
 
-// Placeholder Admin con header
 const AdminPlaceholder = ({ title }: { title: string }) => (
   <>
     <header className="w-full px-6 py-5 flex items-center justify-between border-b border-white/5 bg-background-dark/50 backdrop-blur-sm sticky top-0">
@@ -111,6 +140,16 @@ const AppRoutes = () => {
         <Route path="/aliados" element={<Placeholder title="Aliados" />} />
         <Route path="/faq" element={<Placeholder title="FAQ" />} />
         <Route path="/contacto" element={<Placeholder title="Contacto" />} />
+        {/* Experiencias */}
+        <Route path="/experiences" element={<ExperienceHub />} />
+        <Route path="/experiences/:slug" element={<ExperienceDetail />} />
+      </Route>
+
+      {/* Rutas Inscripción - Minimal Layout */}
+      <Route path="/inscription" element={<MinimalLayout />}>
+        <Route path="level" element={<LevelSelection />} />
+        <Route path="form" element={<RegistrationForm />} />
+        <Route path="success" element={<InscriptionSuccess />} />
       </Route>
 
       {/* Rutas Tienda - Layout Normal */}
