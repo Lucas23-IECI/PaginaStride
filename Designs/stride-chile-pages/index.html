@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stride Chile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Satisfy&family=Lexend:wght@100..900&family=Noto+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#e92063",
+              "primary-hover": "#d11d60",
+              secondary: "#00BCD4",
+              "secondary-cyan": "#00BCD4",
+              "accent-cyan": "#00d4ff",
+              gold: "#ffd700",
+              "background-light": "#f8f6f6",
+              "background-dark": "#121212",
+              "surface-dark": "#1E1E1E",
+              "card-dark": "#261c20",
+            },
+            fontFamily: {
+              display: ["Plus Jakarta Sans", "sans-serif"],
+              script: ["Satisfy", "cursive"],
+              body: ["Noto Sans", "sans-serif"],
+              lexend: ["Lexend", "sans-serif"],
+            },
+            backgroundImage: {
+              "gradient-primary": "linear-gradient(to right, #e92063, #00BCD4)",
+              "chevron-pattern":
+                "url(\"data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9' stroke='%23333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "1.5rem",
+              xl: "2rem",
+              "2xl": "2.5rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Custom utility classes */
+      .bg-chevron {
+        background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDm0HwFJsgvhNVZfU-6MxQ6KNNI8a_3Va-ISt46l26FOwv6ydhc8dY6CLL1jh8HHolsM_Skcro6JK69vYyBys9CYMdNGins4wecrb0NnVkfJkdg-rMbTE9DqkMnqt4vTG2GQGqqdLuSzxRJf-_7EdDAgRtulkeot21ukXJMYneLPAGG1e4mfWb_5D-P4wGHNFXNCIOyFA0TbdNUaL3eZGSDWi0iar8SrY2J7alSsD9V2yd3eo3fzevpnP9T-k2OXaSpN0Rcn39diTog);
+      }
+      .bg-chevron-light {
+        background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAW_byKY5411ZfDzLOJq1uhOpFByPRizRGn1d_eBOUOBL-BBYvdTuU0wkge2UGc-avoljNnsIjEdpypTIxSnkYgiYszADzXyZgw8VWHUEfjXyw8ZNR9y5c1lrVahzDVFMLn7mL5-qj7-xQ_GLmWLH0qk2PodlSEu0X2cRccINN-xW_EVZHBRsqH3_F1YfKeRkDsC878Tg7MGOJkSQD7QEWlp_JF_Ywt7-28jp52x9kxCe1eHZ6bIg7PpqI5KukU8eFNVvM9LGVUfq3o);
+      }
+      .frosted-glass {
+        background: rgba(18, 18, 18, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .text-gradient {
+        background: linear-gradient(to right, #e92063, #00bcd4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .map-container iframe {
+        filter: invert(90%) hue-rotate(180deg);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden antialiased selection:bg-primary selection:text-white">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

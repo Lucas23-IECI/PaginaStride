@@ -1,0 +1,5 @@
+{
+  "name": "Stride Monitor Panel",
+  "description": "High-fidelity monitor dashboard for Stride running app, featuring attendance management, session reporting, and pacer profiles.",
+  "requestFramePermissions": []
+}

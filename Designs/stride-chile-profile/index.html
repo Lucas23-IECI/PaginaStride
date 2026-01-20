@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stride Chile</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;family=Satisfy&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e92063",
+                        "secondary": "#00BCD4",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0A0A0A", 
+                        "surface-dark": "#161616",
+                        "card-dark": "#1E1E1E",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "script": ["Satisfy", "cursive"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "1.5rem",
+                        "xl": "2rem",
+                        "2xl": "2.5rem",
+                        "full": "9999px"
+                    },
+                    backgroundImage: {
+                        'gradient-primary': 'linear-gradient(to right, #e92063, #00BCD4)',
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        .bg-chevron {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDm0HwFJsgvhNVZfU-6MxQ6KNNI8a_3Va-ISt46l26FOwv6ydhc8dY6CLL1jh8HHolsM_Skcro6JK69vYyBys9CYMdNGins4wecrb0NnVkfJkdg-rMbTE9DqkMnqt4vTG2GQGqqdLuSzxRJf-_7EdDAgRtulkeot21ukXJMYneLPAGG1e4mfWb_5D-P4wGHNFXNCIOyFA0TbdNUaL3eZGSDWi0iar8SrY2J7alSsD9V2yd3eo3fzevpnP9T-k2OXaSpN0Rcn39diTog);
+        }
+        .bg-chevron-light {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAW_byKY5411ZfDzLOJq1uhOpFByPRizRGn1d_eBOUOBL-BBYvdTuU0wkge2UGc-avoljNnsIjEdpypTIxSnkYgiYszADzXyZgw8VWHUEfjXyw8ZNR9y5c1lrVahzDVFMLn7mL5-qj7-xQ_GLmWLH0qk2PodlSEu0X2cRccINN-xW_EVZHBRsqH3_F1YfKeRkDsC878Tg7MGOJkSQD7QEWlp_JF_Ywt7-28jp52x9kxCe1eHZ6bIg7PpqI5KukU8eFNVvM9LGVUfq3o);
+        }
+        .frosted-glass {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #e92063, #00BCD4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .sidebar-link.active {
+            @apply bg-white/10 text-white border-l-4 border-primary;
+        }
+        .calendar-day {
+            @apply aspect-square flex items-center justify-center rounded-xl text-sm font-medium border border-white/5 hover:border-white/20 transition-all;
+        }
+        .calendar-day.has-event {
+            @apply bg-primary/10 text-primary border-primary/30;
+        }
+        .calendar-day.has-event-secondary {
+            @apply bg-secondary/10 text-secondary border-secondary/30;
+        }
+        .calendar-day.today {
+            @apply ring-2 ring-secondary text-secondary;
+        }
+        .gradient-border {
+            position: relative;
+            background: #262626;
+            border-radius: 1rem;
+        }
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: 1.1rem;
+            background: linear-gradient(45deg, #e92063, #00d4ff);
+            z-index: -1;
+            opacity: 0.5;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-background-dark font-display text-white overflow-x-hidden antialiased selection:bg-primary selection:text-white min-h-screen">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
