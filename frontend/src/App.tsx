@@ -2,14 +2,15 @@ import { BrowserRouter, Routes, Route, Outlet, Link, useLocation } from 'react-r
 import { Navbar, Footer } from '@/components/layout';
 import { CartDrawer } from '@/components/store';
 import { CartProvider, useCart } from '@/contexts/CartContext';
-import { Home } from '@/features/landing';
+import { Home, About, Training, Trips, Alliances, FAQ, Contact } from '@/features/landing';
 import { Catalog, ProductDetail, Checkout, Confirmation } from '@/features/store';
-import { Dashboard, Users, EventList, CreateEvent } from '@/features/admin';
-import { ProfileDashboard, MyEvents } from '@/features/profile';
-import { MonitorDashboard } from '@/features/monitor';
+import { Dashboard, Users, EventList, CreateEvent, Sales, Inventory, Settings } from '@/features/admin';
+import { ProfileDashboard, MyEvents, EditProfile, Achievements, Registrations } from '@/features/profile';
+import { MonitorDashboard, SessionReport, MonitorProfile } from '@/features/monitor';
 import { ExperienceHub, ExperienceDetail } from '@/features/experiences';
 import { LevelSelection, RegistrationForm, InscriptionSuccess } from '@/features/events/inscription';
 import DashboardLayout from '@/layouts/DashboardLayout';
+import ProfileLayout from '@/layouts/ProfileLayout';
 
 // ============================================
 // LAYOUTS
@@ -134,12 +135,12 @@ const AppRoutes = () => {
       {/* Rutas Públicas */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/nosotros" element={<Placeholder title="Nosotros" />} />
-        <Route path="/entrenamiento" element={<Placeholder title="Entrenamientos" />} />
-        <Route path="/viajes" element={<Placeholder title="Viajes" />} />
-        <Route path="/aliados" element={<Placeholder title="Aliados" />} />
-        <Route path="/faq" element={<Placeholder title="FAQ" />} />
-        <Route path="/contacto" element={<Placeholder title="Contacto" />} />
+        <Route path="/nosotros" element={<About />} />
+        <Route path="/entrenamiento" element={<Training />} />
+        <Route path="/viajes" element={<Trips />} />
+        <Route path="/aliados" element={<Alliances />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/contacto" element={<Contact />} />
         {/* Experiencias */}
         <Route path="/experiences" element={<ExperienceHub />} />
         <Route path="/experiences/:slug" element={<ExperienceDetail />} />
@@ -170,24 +171,25 @@ const AppRoutes = () => {
         <Route path="events" element={<EventList />} />
         <Route path="events/new" element={<CreateEvent />} />
         <Route path="users" element={<Users />} />
-        <Route path="sales" element={<AdminPlaceholder title="Ventas" />} />
-        <Route path="inventory" element={<AdminPlaceholder title="Inventario" />} />
-        <Route path="settings" element={<AdminPlaceholder title="Configuración" />} />
+        <Route path="sales" element={<Sales />} />
+        <Route path="inventory" element={<Inventory />} />
+        <Route path="settings" element={<Settings />} />
       </Route>
 
-      {/* Rutas Perfil Usuario - Dashboard Layout */}
-      <Route path="/profile" element={<DashboardLayout />}>
+      {/* Rutas Perfil Usuario - Profile Layout con Sidebar propio */}
+      <Route path="/profile" element={<ProfileLayout />}>
         <Route index element={<ProfileDashboard />} />
         <Route path="events" element={<MyEvents />} />
-        <Route path="purchases" element={<AdminPlaceholder title="Mis Compras" />} />
-        <Route path="settings" element={<AdminPlaceholder title="Ajustes" />} />
+        <Route path="edit" element={<EditProfile />} />
+        <Route path="achievements" element={<Achievements />} />
+        <Route path="registrations" element={<Registrations />} />
       </Route>
 
       {/* Rutas Monitor - Dashboard Layout */}
       <Route path="/monitor" element={<DashboardLayout />}>
         <Route index element={<MonitorDashboard />} />
-        <Route path="report" element={<AdminPlaceholder title="Reporte Sesión" />} />
-        <Route path="profile" element={<AdminPlaceholder title="Perfil Monitor" />} />
+        <Route path="report" element={<SessionReport />} />
+        <Route path="profile" element={<MonitorProfile />} />
       </Route>
     </Routes>
   );

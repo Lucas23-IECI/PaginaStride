@@ -94,3 +94,67 @@ body {
 .animate-fadeIn {
     animation: fadeIn 1s ease-out forwards;
 }
+
+/* =========================================
+   CALENDAR STYLES - De Profile
+   ========================================= */
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.calendar-day:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.calendar-day.has-event {
+    background-color: rgba(233, 32, 99, 0.1);
+    color: #e92063;
+    border-color: rgba(233, 32, 99, 0.3);
+    font-weight: 700;
+}
+
+.calendar-day.has-event-secondary {
+    background-color: rgba(0, 188, 212, 0.1);
+    color: #00bcd4;
+    border-color: rgba(0, 188, 212, 0.3);
+    font-weight: 700;
+}
+
+.calendar-day.today {
+    ring: 2px;
+    ring-color: white;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================
+   SIDEBAR STYLES - De Profile
+   ========================================= */
+.sidebar-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-left: 4px solid #e92063;
+}
+
+/* =========================================
+   CARD STYLES - Extras
+   ========================================= */
+.bg-card-dark {
+    background-color: #1E1E1E;
+}
+
+/* =========================================
+   GRADIENT PRIMARY - Para botones
+   ========================================= */
+.bg-gradient-primary {
+    background: linear-gradient(to right, #e92063, #00bcd4);
+}

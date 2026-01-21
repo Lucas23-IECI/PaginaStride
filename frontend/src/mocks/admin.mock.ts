@@ -233,3 +233,240 @@ export const MOCK_ADMIN_USERS: AdminUser[] = [
         joinedDate: '25 Jun 2024',
     },
 ];
+
+// ============================================
+// SALES MOCK DATA
+// ============================================
+
+export interface Sale {
+    id: string;
+    orderId: string;
+    user: string;
+    email: string;
+    product: string;
+    quantity: number;
+    amount: number;
+    status: 'completed' | 'pending' | 'refunded' | 'cancelled';
+    paymentMethod: 'card' | 'transfer' | 'cash';
+    date: string;
+}
+
+export const MOCK_SALES: Sale[] = [
+    {
+        id: '1',
+        orderId: 'ORD-2024-001',
+        user: 'María González',
+        email: 'maria@email.com',
+        product: 'Polera Stride Running',
+        quantity: 2,
+        amount: 59980,
+        status: 'completed',
+        paymentMethod: 'card',
+        date: '2024-01-20T14:30:00'
+    },
+    {
+        id: '2',
+        orderId: 'ORD-2024-002',
+        user: 'Carlos Pérez',
+        email: 'carlos@email.com',
+        product: 'Gorra Stride Pro',
+        quantity: 1,
+        amount: 24990,
+        status: 'completed',
+        paymentMethod: 'transfer',
+        date: '2024-01-20T12:15:00'
+    },
+    {
+        id: '3',
+        orderId: 'ORD-2024-003',
+        user: 'Ana Martínez',
+        email: 'ana@email.com',
+        product: 'Pack Entrenamiento Completo',
+        quantity: 1,
+        amount: 89990,
+        status: 'pending',
+        paymentMethod: 'card',
+        date: '2024-01-20T10:00:00'
+    },
+    {
+        id: '4',
+        orderId: 'ORD-2024-004',
+        user: 'Pedro Silva',
+        email: 'pedro@email.com',
+        product: 'Botella Hidratación 750ml',
+        quantity: 3,
+        amount: 44970,
+        status: 'completed',
+        paymentMethod: 'cash',
+        date: '2024-01-19T18:45:00'
+    },
+    {
+        id: '5',
+        orderId: 'ORD-2024-005',
+        user: 'Laura Chen',
+        email: 'laura@email.com',
+        product: 'Calcetines Running x3',
+        quantity: 2,
+        amount: 29980,
+        status: 'refunded',
+        paymentMethod: 'card',
+        date: '2024-01-19T16:20:00'
+    },
+    {
+        id: '6',
+        orderId: 'ORD-2024-006',
+        user: 'Diego Rojas',
+        email: 'diego@email.com',
+        product: 'Chaqueta Cortaviento',
+        quantity: 1,
+        amount: 79990,
+        status: 'completed',
+        paymentMethod: 'card',
+        date: '2024-01-19T11:30:00'
+    }
+];
+
+// ============================================
+// INVENTORY MOCK DATA
+// ============================================
+
+export interface InventoryItem {
+    id: string;
+    sku: string;
+    name: string;
+    category: string;
+    price: number;
+    stock: number;
+    minStock: number;
+    status: 'active' | 'inactive';
+    lastRestocked: string;
+}
+
+export const MOCK_INVENTORY: InventoryItem[] = [
+    {
+        id: '1',
+        sku: 'STR-POL-001',
+        name: 'Polera Stride Running',
+        category: 'Ropa',
+        price: 29990,
+        stock: 45,
+        minStock: 10,
+        status: 'active',
+        lastRestocked: '2024-01-15'
+    },
+    {
+        id: '2',
+        sku: 'STR-GOR-001',
+        name: 'Gorra Stride Pro',
+        category: 'Accesorios',
+        price: 24990,
+        stock: 8,
+        minStock: 10,
+        status: 'active',
+        lastRestocked: '2024-01-10'
+    },
+    {
+        id: '3',
+        sku: 'STR-BOT-001',
+        name: 'Botella Hidratación 750ml',
+        category: 'Accesorios',
+        price: 14990,
+        stock: 3,
+        minStock: 15,
+        status: 'active',
+        lastRestocked: '2024-01-05'
+    },
+    {
+        id: '4',
+        sku: 'STR-CAL-001',
+        name: 'Calcetines Running x3',
+        category: 'Ropa',
+        price: 14990,
+        stock: 62,
+        minStock: 20,
+        status: 'active',
+        lastRestocked: '2024-01-18'
+    },
+    {
+        id: '5',
+        sku: 'STR-CHQ-001',
+        name: 'Chaqueta Cortaviento',
+        category: 'Ropa',
+        price: 79990,
+        stock: 12,
+        minStock: 5,
+        status: 'active',
+        lastRestocked: '2024-01-12'
+    },
+    {
+        id: '6',
+        sku: 'STR-SHO-001',
+        name: 'Shorts Running Pro',
+        category: 'Ropa',
+        price: 34990,
+        stock: 0,
+        minStock: 10,
+        status: 'inactive',
+        lastRestocked: '2023-12-20'
+    },
+    {
+        id: '7',
+        sku: 'STR-BAN-001',
+        name: 'Banda Reflectante LED',
+        category: 'Accesorios',
+        price: 12990,
+        stock: 5,
+        minStock: 10,
+        status: 'active',
+        lastRestocked: '2024-01-08'
+    }
+];
+
+// ============================================
+// SESSION REPORT MOCK DATA
+// ============================================
+
+export interface SessionAttendee {
+    id: string;
+    name: string;
+    level: string;
+    attended: boolean;
+    checkInTime?: string;
+}
+
+export interface SessionReportData {
+    id: string;
+    eventName: string;
+    date: string;
+    location: string;
+    weather: 'sunny' | 'cloudy' | 'rainy' | 'windy';
+    temperature: number;
+    totalRegistered: number;
+    attendees: SessionAttendee[];
+    incidents: string[];
+    monitorNotes: string;
+}
+
+export const MOCK_SESSION_REPORT: SessionReportData = {
+    id: 'session-001',
+    eventName: 'Social Run Martes',
+    date: '2024-01-20T19:30:00',
+    location: 'Parque Bicentenario',
+    weather: 'cloudy',
+    temperature: 18,
+    totalRegistered: 25,
+    attendees: [
+        { id: '1', name: 'María González', level: 'Intermedio', attended: true, checkInTime: '19:25' },
+        { id: '2', name: 'Carlos Pérez', level: 'Avanzado', attended: true, checkInTime: '19:28' },
+        { id: '3', name: 'Ana Martínez', level: 'Principiante', attended: true, checkInTime: '19:30' },
+        { id: '4', name: 'Pedro Silva', level: 'Intermedio', attended: false },
+        { id: '5', name: 'Laura Chen', level: 'Avanzado', attended: true, checkInTime: '19:32' },
+        { id: '6', name: 'Diego Rojas', level: 'Principiante', attended: true, checkInTime: '19:35' },
+        { id: '7', name: 'Sofía Torres', level: 'Intermedio', attended: false },
+        { id: '8', name: 'Andrés López', level: 'Avanzado', attended: true, checkInTime: '19:27' },
+    ],
+    incidents: [
+        'Un participante tuvo un calambre menor en el km 3, se recuperó sin problemas.',
+    ],
+    monitorNotes: 'Sesión exitosa. Buen ritmo grupal. Se recomienda agregar más agua en el punto de hidratación.'
+};
