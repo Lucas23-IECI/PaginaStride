@@ -1,83 +1,33 @@
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-interface UserEvent {
-    id: string;
-    name: string;
-    date: string;
-    month: string;
-    location: string;
-    type: string;
-    category: string;
-    status: 'registered' | 'confirmed';
-}
-
-interface PastEvent {
-    id: string;
-    date: string;
-    name: string;
-    subtitle: string;
-    distance: string;
-    points: number;
-}
-
-const UPCOMING_EVENTS: UserEvent[] = [
-    {
-        id: '1',
-        name: 'Parque Bicentenario Run',
-        date: '24',
-        month: 'OCT',
-        location: 'Av. Bicentenario 3800, Vitacura',
-        type: 'Social Run',
-        category: '5K / 10K',
-        status: 'registered',
-    },
-    {
-        id: '2',
-        name: 'Sunset City Run & Yoga',
-        date: '02',
-        month: 'NOV',
-        location: 'Parque Araucano, Las Condes',
-        type: 'Social Girl',
-        category: 'Yoga + 5K',
-        status: 'confirmed',
-    },
-];
-
-const PAST_EVENTS: PastEvent[] = [
-    { id: '1', date: '28 Sep 2023', name: 'Cerro San Cristóbal', subtitle: 'Morning Climb', distance: '12.5 km', points: 150 },
-    { id: '2', date: '15 Sep 2023', name: 'Costanera Night Run', subtitle: 'City Circuit', distance: '8.0 km', points: 100 },
-    { id: '3', date: '01 Sep 2023', name: 'Spring Kickoff', subtitle: 'Community Event', distance: '5.0 km', points: 75 },
-];
+// ============================================
+// MY EVENTS - Mis Eventos
+// Fuente: HTML #3 - PERFIL MIS EVENTOS
+// ============================================
 
 const MyEvents = () => {
-    const [tab, setTab] = useState<'upcoming' | 'history'>('upcoming');
-
     return (
-        <div className="flex-1 h-full overflow-y-auto relative">
+        <>
+            {/* Header */}
             <header className="sticky top-0 z-40 bg-background-dark/80 backdrop-blur-md border-b border-white/5 p-6 md:px-10 md:py-6">
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                     <div className="space-y-4 w-full md:w-auto">
                         <div className="flex items-center justify-between md:justify-start gap-6">
                             <h2 className="text-3xl font-black text-white tracking-tight">Mis Eventos</h2>
+                            <button className="md:hidden p-2 bg-white/5 rounded-full"><span className="material-symbols-outlined">search</span></button>
                         </div>
                         <div className="flex items-center gap-4">
                             <div className="bg-surface-dark p-1 rounded-full inline-flex border border-white/5">
-                                <button
-                                    onClick={() => setTab('upcoming')}
-                                    className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${tab === 'upcoming' ? 'bg-white/10 text-white shadow-sm' : 'text-white/40 hover:text-white'}`}
-                                >
-                                    Próximos
-                                </button>
-                                <button
-                                    onClick={() => setTab('history')}
-                                    className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${tab === 'history' ? 'bg-white/10 text-white shadow-sm' : 'text-white/40 hover:text-white'}`}
-                                >
-                                    Historial
-                                </button>
+                                <button className="px-5 py-2 rounded-full bg-white/10 text-white text-xs font-bold shadow-sm transition-all">Próximos</button>
+                                <button className="px-5 py-2 rounded-full text-white/40 hover:text-white text-xs font-bold transition-all">Historial</button>
                             </div>
                         </div>
                     </div>
                     <div className="hidden md:flex items-center gap-4 w-full md:w-auto justify-end">
+                        <div className="relative group">
+                            <span className="material-symbols-outlined absolute left-3 top-2.5 text-white/40 group-focus-within:text-primary transition-colors">search</span>
+                            <input className="bg-surface-dark border border-white/10 rounded-full pl-10 pr-4 py-2.5 text-sm text-white placeholder-white/30 focus:ring-2 focus:ring-primary/50 focus:border-primary w-64 transition-all" placeholder="Buscar evento o ubicación..." type="text" />
+                        </div>
                         <button className="flex items-center gap-2 bg-white text-black hover:bg-gray-200 px-5 py-2.5 rounded-full text-xs font-bold transition-all transform hover:scale-105 shadow-lg shadow-white/5">
                             <span className="material-symbols-outlined text-lg">download</span>
                             <span>Descargar Calendario</span>
@@ -88,128 +38,176 @@ const MyEvents = () => {
 
             <div className="p-6 md:p-10 grid grid-cols-1 xl:grid-cols-3 gap-8">
                 <div className="xl:col-span-2 space-y-10">
-                    {tab === 'upcoming' && (
-                        <section>
-                            <div className="flex items-center justify-between mb-6">
-                                <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                                    <span className="material-symbols-outlined text-primary">event_upcoming</span>
-                                    Próximas Inscripciones
-                                </h3>
-                            </div>
-                            <div className="space-y-4">
-                                {UPCOMING_EVENTS.map((event) => (
-                                    <div key={event.id} className={`bg-surface-dark rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-6 border border-white/5 hover:border-${event.status === 'registered' ? 'primary' : 'secondary'}/40 transition-all group relative overflow-hidden`}>
-                                        <div className={`absolute inset-0 bg-gradient-to-r from-${event.status === 'registered' ? 'primary' : 'secondary'}/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity`}></div>
-                                        <div className="bg-black rounded-xl w-full sm:w-24 h-24 flex flex-col items-center justify-center border border-white/5 relative z-10 flex-shrink-0">
-                                            <span className="text-3xl font-black text-white">{event.date}</span>
-                                            <span className={`text-xs font-bold uppercase tracking-widest ${event.status === 'registered' ? 'text-primary' : 'text-secondary'}`}>
-                                                {event.month}
-                                            </span>
-                                        </div>
-                                        <div className="flex-1 text-center sm:text-left relative z-10 w-full">
-                                            <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
-                                                <span className={`px-2 py-1 rounded ${event.status === 'registered' ? 'bg-primary text-white' : 'bg-secondary text-black'} text-[10px] font-bold uppercase tracking-wider`}>
-                                                    {event.type}
-                                                </span>
-                                                <span className="px-2 py-1 rounded bg-white/5 text-white/40 text-[10px] font-bold uppercase tracking-wider">
-                                                    {event.category}
-                                                </span>
-                                            </div>
-                                            <h4 className="text-xl font-bold text-white mb-1">{event.name}</h4>
-                                            <div className="flex items-center justify-center sm:justify-start gap-1 text-white/50 text-xs">
-                                                <span className="material-symbols-outlined text-sm">location_on</span>
-                                                <span>{event.location}</span>
-                                            </div>
-                                        </div>
-                                        <button className="relative z-10 w-full sm:w-auto px-6 py-3 bg-white text-black rounded-full font-bold text-xs hover:bg-gray-200 transition-all flex items-center justify-center gap-2 shadow-lg">
-                                            <span className="material-symbols-outlined text-lg">qr_code_2</span>
-                                            Ver Ticket
-                                        </button>
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
-                    )}
-
-                    {tab === 'history' && (
-                        <section>
-                            <div className="flex items-center justify-between mb-6">
-                                <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                                    <span className="material-symbols-outlined text-white/60">history</span>
-                                    Historial de Runs
-                                </h3>
-                            </div>
-                            <div className="bg-surface-dark rounded-3xl border border-white/5 overflow-hidden">
-                                <div className="overflow-x-auto">
-                                    <table className="w-full text-left border-collapse">
-                                        <thead>
-                                            <tr className="bg-white/5 border-b border-white/5 text-xs text-white/40 uppercase tracking-widest">
-                                                <th className="p-5 font-bold whitespace-nowrap">Fecha</th>
-                                                <th className="p-5 font-bold whitespace-nowrap">Evento</th>
-                                                <th className="p-5 font-bold text-center whitespace-nowrap">Distancia</th>
-                                                <th className="p-5 font-bold text-center whitespace-nowrap">Social Pts</th>
-                                                <th className="p-5 font-bold text-right whitespace-nowrap">Recuerdos</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="text-sm">
-                                            {PAST_EVENTS.map((event) => (
-                                                <tr key={event.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                                                    <td className="p-5 text-white/60 font-medium whitespace-nowrap">{event.date}</td>
-                                                    <td className="p-5">
-                                                        <div className="font-bold text-white">{event.name}</div>
-                                                        <span className="text-xs text-white/40">{event.subtitle}</span>
-                                                    </td>
-                                                    <td className="p-5 text-center">
-                                                        <span className="inline-block px-3 py-1 rounded-full bg-surface-dark border border-white/10 text-xs font-bold text-secondary">
-                                                            {event.distance}
-                                                        </span>
-                                                    </td>
-                                                    <td className="p-5 text-center">
-                                                        <span className="text-primary font-bold">+{event.points}</span>
-                                                    </td>
-                                                    <td className="p-5 text-right">
-                                                        <a className="text-white/60 hover:text-white hover:underline text-xs font-bold inline-flex items-center gap-1 transition-all" href="#">
-                                                            <span className="material-symbols-outlined text-sm">photo_library</span>
-                                                            Ver Fotos
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
+                    {/* Próximas Inscripciones */}
+                    <section>
+                        <div className="flex items-center justify-between mb-6">
+                            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                                <span className="material-symbols-outlined text-primary">event_upcoming</span>
+                                Próximas Inscripciones
+                            </h3>
+                        </div>
+                        <div className="space-y-4">
+                            {/* Card 1 */}
+                            <div className="bg-card-dark rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-6 border border-white/5 hover:border-primary/40 transition-all group relative overflow-hidden">
+                                <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div className="bg-surface-dark rounded-xl w-full sm:w-24 h-24 flex flex-col items-center justify-center border border-white/5 relative z-10 flex-shrink-0">
+                                    <span className="text-3xl font-black text-white">24</span>
+                                    <span className="text-xs font-bold text-primary uppercase tracking-widest">OCT</span>
                                 </div>
+                                <div className="flex-1 text-center sm:text-left relative z-10 w-full">
+                                    <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
+                                        <span className="px-2 py-1 rounded bg-primary text-white text-[10px] font-bold uppercase tracking-wider">Social Run</span>
+                                        <span className="px-2 py-1 rounded bg-white/5 text-white/40 text-[10px] font-bold uppercase tracking-wider">5K / 10K</span>
+                                    </div>
+                                    <h4 className="text-xl font-bold text-white mb-1">Parque Bicentenario Run</h4>
+                                    <div className="flex items-center justify-center sm:justify-start gap-1 text-white/50 text-xs">
+                                        <span className="material-symbols-outlined text-sm">location_on</span>
+                                        <span>Av. Bicentenario 3800, Vitacura</span>
+                                    </div>
+                                </div>
+                                <button className="relative z-10 w-full sm:w-auto px-6 py-3 bg-white text-black rounded-full font-bold text-xs hover:bg-gray-200 transition-all flex items-center justify-center gap-2 shadow-lg">
+                                    <span className="material-symbols-outlined text-lg">qr_code_2</span>
+                                    Ver Ticket
+                                </button>
                             </div>
-                        </section>
-                    )}
+
+                            {/* Card 2 */}
+                            <div className="bg-card-dark rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-6 border border-white/5 hover:border-secondary/40 transition-all group relative overflow-hidden">
+                                <div className="absolute inset-0 bg-gradient-to-r from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div className="bg-surface-dark rounded-xl w-full sm:w-24 h-24 flex flex-col items-center justify-center border border-white/5 relative z-10 flex-shrink-0">
+                                    <span className="text-3xl font-black text-white">02</span>
+                                    <span className="text-xs font-bold text-secondary uppercase tracking-widest">NOV</span>
+                                </div>
+                                <div className="flex-1 text-center sm:text-left relative z-10 w-full">
+                                    <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
+                                        <span className="px-2 py-1 rounded bg-secondary text-black text-[10px] font-bold uppercase tracking-wider">Social Girl</span>
+                                        <span className="px-2 py-1 rounded bg-white/5 text-white/40 text-[10px] font-bold uppercase tracking-wider">Yoga + 5K</span>
+                                    </div>
+                                    <h4 className="text-xl font-bold text-white mb-1">Sunset City Run & Yoga</h4>
+                                    <div className="flex items-center justify-center sm:justify-start gap-1 text-white/50 text-xs">
+                                        <span className="material-symbols-outlined text-sm">location_on</span>
+                                        <span>Parque Araucano, Las Condes</span>
+                                    </div>
+                                </div>
+                                <button className="relative z-10 w-full sm:w-auto px-6 py-3 bg-white text-black rounded-full font-bold text-xs hover:bg-gray-200 transition-all flex items-center justify-center gap-2 shadow-lg">
+                                    <span className="material-symbols-outlined text-lg">qr_code_2</span>
+                                    Ver Ticket
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Historial de Runs */}
+                    <section>
+                        <div className="flex items-center justify-between mb-6">
+                            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                                <span className="material-symbols-outlined text-white/60">history</span>
+                                Historial de Runs
+                            </h3>
+                        </div>
+                        <div className="bg-card-dark rounded-3xl border border-white/5 overflow-hidden">
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left border-collapse">
+                                    <thead>
+                                        <tr className="bg-white/5 border-b border-white/5 text-xs text-white/40 uppercase tracking-widest">
+                                            <th className="p-5 font-bold whitespace-nowrap">Fecha</th>
+                                            <th className="p-5 font-bold whitespace-nowrap">Evento</th>
+                                            <th className="p-5 font-bold text-center whitespace-nowrap">Distancia</th>
+                                            <th className="p-5 font-bold text-center whitespace-nowrap">Social Pts</th>
+                                            <th className="p-5 font-bold text-right whitespace-nowrap">Recuerdos</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="text-sm">
+                                        <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                            <td className="p-5 text-white/60 font-medium whitespace-nowrap">28 Sep 2023</td>
+                                            <td className="p-5">
+                                                <div className="font-bold text-white">Cerro San Cristóbal</div>
+                                                <span className="text-xs text-white/40">Morning Climb</span>
+                                            </td>
+                                            <td className="p-5 text-center">
+                                                <span className="inline-block px-3 py-1 rounded-full bg-surface-dark border border-white/10 text-xs font-bold text-secondary">12.5 km</span>
+                                            </td>
+                                            <td className="p-5 text-center">
+                                                <span className="text-primary font-bold">+150</span>
+                                            </td>
+                                            <td className="p-5 text-right">
+                                                <a className="text-white/60 hover:text-white hover:underline text-xs font-bold inline-flex items-center gap-1 transition-all" href="#">
+                                                    <span className="material-symbols-outlined text-sm">photo_library</span> Ver Fotos
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                            <td className="p-5 text-white/60 font-medium whitespace-nowrap">15 Sep 2023</td>
+                                            <td className="p-5">
+                                                <div className="font-bold text-white">Costanera Night Run</div>
+                                                <span className="text-xs text-white/40">City Circuit</span>
+                                            </td>
+                                            <td className="p-5 text-center">
+                                                <span className="inline-block px-3 py-1 rounded-full bg-surface-dark border border-white/10 text-xs font-bold text-secondary">8.0 km</span>
+                                            </td>
+                                            <td className="p-5 text-center">
+                                                <span className="text-primary font-bold">+100</span>
+                                            </td>
+                                            <td className="p-5 text-right">
+                                                <a className="text-white/60 hover:text-white hover:underline text-xs font-bold inline-flex items-center gap-1 transition-all" href="#">
+                                                    <span className="material-symbols-outlined text-sm">photo_library</span> Ver Fotos
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                            <td className="p-5 text-white/60 font-medium whitespace-nowrap">01 Sep 2023</td>
+                                            <td className="p-5">
+                                                <div className="font-bold text-white">Spring Kickoff</div>
+                                                <span className="text-xs text-white/40">Community Event</span>
+                                            </td>
+                                            <td className="p-5 text-center">
+                                                <span className="inline-block px-3 py-1 rounded-full bg-surface-dark border border-white/10 text-xs font-bold text-secondary">5.0 km</span>
+                                            </td>
+                                            <td className="p-5 text-center">
+                                                <span className="text-primary font-bold">+75</span>
+                                            </td>
+                                            <td className="p-5 text-right">
+                                                <a className="text-white/60 hover:text-white hover:underline text-xs font-bold inline-flex items-center gap-1 transition-all" href="#">
+                                                    <span className="material-symbols-outlined text-sm">photo_library</span> Ver Fotos
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
                 </div>
 
-                {/* Sidebar Calendario */}
+                {/* Sidebar - Calendar */}
                 <div className="space-y-6">
-                    <div className="bg-surface-dark p-6 rounded-3xl border border-white/5 sticky top-28 shadow-2xl">
+                    <div className="bg-card-dark p-6 rounded-3xl border border-white/5 sticky top-28 shadow-2xl">
                         <div className="flex items-center justify-between mb-6">
-                            <span className="text-lg font-bold">Octubre 2024</span>
+                            <span className="text-lg font-bold">Octubre 2023</span>
                             <div className="flex gap-2">
-                                <button className="w-8 h-8 flex items-center justify-center bg-white/5 rounded-full hover:bg-white/10 transition-all text-white/60">
-                                    <span className="material-symbols-outlined text-sm">chevron_left</span>
-                                </button>
-                                <button className="w-8 h-8 flex items-center justify-center bg-white/5 rounded-full hover:bg-white/10 transition-all text-white/60">
-                                    <span className="material-symbols-outlined text-sm">chevron_right</span>
-                                </button>
+                                <button className="w-8 h-8 flex items-center justify-center bg-white/5 rounded-full hover:bg-white/10 transition-all text-white/60"><span className="material-symbols-outlined text-sm">chevron_left</span></button>
+                                <button className="w-8 h-8 flex items-center justify-center bg-white/5 rounded-full hover:bg-white/10 transition-all text-white/60"><span className="material-symbols-outlined text-sm">chevron_right</span></button>
                             </div>
                         </div>
                         <div className="grid grid-cols-7 gap-2 mb-6">
-                            {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d, i) => (
-                                <div key={i} className="text-center text-[10px] font-black text-white/30 uppercase tracking-widest pb-2">{d}</div>
+                            {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((day, i) => (
+                                <div key={i} className="text-center text-[10px] font-black text-white/30 uppercase tracking-widest pb-2">{day}</div>
                             ))}
-                            {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => {
-                                let className = 'w-8 h-8 flex items-center justify-center rounded-full text-xs font-medium text-white/60 hover:bg-white/10 transition-colors';
-                                if (d === 24) className = 'w-8 h-8 flex items-center justify-center rounded-full text-xs font-bold bg-primary text-white';
-                                else if (d === 20) className = 'w-8 h-8 flex items-center justify-center rounded-full text-xs font-bold ring-2 ring-primary text-white';
-                                return <div key={d} className={className}>{d}</div>;
-                            })}
+                            {[26, 27, 28, 29, 30].map((d) => (
+                                <div key={`prev-${d}`} className="calendar-day text-white/10 opacity-20">{d}</div>
+                            ))}
+                            <div className="calendar-day">1</div>
+                            <div className="calendar-day has-event-secondary">2</div>
+                            {[3, 4, 5, 6, 7, 8, 9].map((d) => <div key={d} className="calendar-day">{d}</div>)}
+                            <div className="calendar-day today">10</div>
+                            {[11, 12].map((d) => <div key={d} className="calendar-day">{d}</div>)}
+                            <div className="calendar-day has-event-secondary">13</div>
+                            {[14, 15, 16, 17, 18, 19, 20, 21, 22, 23].map((d) => <div key={d} className="calendar-day">{d}</div>)}
+                            <div className="calendar-day has-event">24</div>
+                            {[25, 26, 27, 28, 29, 30, 31].map((d) => <div key={d} className="calendar-day">{d}</div>)}
                         </div>
                         <div className="space-y-3">
-                            <div className="flex items-center gap-3 p-3 rounded-xl bg-black border border-white/5">
+                            <div className="flex items-center gap-3 p-3 rounded-xl bg-surface-dark border border-white/5">
                                 <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
                                     <span className="text-primary font-bold text-xs">24</span>
                                 </div>
@@ -219,7 +217,7 @@ const MyEvents = () => {
                                 </div>
                                 <div className="w-2 h-2 rounded-full bg-primary"></div>
                             </div>
-                            <div className="flex items-center gap-3 p-3 rounded-xl bg-black border border-white/5">
+                            <div className="flex items-center gap-3 p-3 rounded-xl bg-surface-dark border border-white/5">
                                 <div className="w-10 h-10 rounded-lg bg-secondary/20 flex items-center justify-center flex-shrink-0">
                                     <span className="text-secondary font-bold text-xs">02</span>
                                 </div>
@@ -233,7 +231,7 @@ const MyEvents = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
